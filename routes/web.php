@@ -21,9 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/alert-config', [AlertConfigController::class, 'index'])->name('alert.config');
 
     Route::get('/alert-config/email', [AlertConfigController::class, 'email'])->name('alert.email');
-    Route::post('/alert-config/email/save', [AlertConfigController::class, 'saveEmailConfig'])->name('alert.email.save');
+    // Route::post('/alert-config/email/save', [AlertConfigController::class, 'saveEmailConfig'])->name('alert.email.save');
 
-
+    Route::get('/alert-config/sms', [AlertConfigController::class, 'sms'])->name('alert.sms');
+    // Route::post('/alert-config/sms/save', [AlertConfigController::class, 'saveSmsConfig'])->name('alert.sms.save');
+    Route::post('/alert-config/{type}/save', [AlertConfigController::class, 'saveConfig'])->name('alert.config.save');
 
 
 });
