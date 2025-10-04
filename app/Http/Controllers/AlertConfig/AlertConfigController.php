@@ -10,10 +10,8 @@ class AlertConfigController extends Controller
 {
     public function index()
     {
-        // Fetch all alert configurations
         $configs = \App\Models\AlertConfig::latest()->get();
 
-        // Pass them to the view
         return view('alert_config.index', compact('configs'));
     }
     public function email()
@@ -21,22 +19,31 @@ class AlertConfigController extends Controller
         return view('alert_config.email_config.index');
     }
 
-    public function saveEmailConfig(Request $request)
+    public function sms()
+    {
+        return view('alert_config.sms_config.index');
+    }
+
+    public function saveConfig(Request $request, $type)
     {
         $validated = $request->validate([
-            'alert_type' => 'required|string',
             'name' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
             'alert_msg' => 'required|string',
         ]);
 
-        // Save to database
+        $validated['alert_type'] = $type;
+
         \App\Models\AlertConfig::create($validated);
 
-        // Redirect back with success message
-        return back()->with('success', '✅ Email configuration saved successfully!');
-    }
+        $message = match ($type) {
+            'email' => '✅ Email configuration saved successfully!',
+            'sms' => '✅ SMS configuration saved successfully!',
+            default => '✅ Configuration saved successfully!',
+        };
 
+        return back()->with('success', $message);
+    }
 
 }

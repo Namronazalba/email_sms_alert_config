@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Email Configuration') }}
+            {{ __('SMS Configuration') }}
         </h2>
     </x-slot>
 
@@ -11,11 +11,14 @@
                 
                 <!-- Header -->
                 <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-8 py-4">
-                    <h3 class="text-xl font-semibold text-white tracking-wide">
-                        📧 Email Alert Configuration
-                    </h3>
-                    <p class="text-indigo-100 text-sm">Manage your alert settings for email notifications.</p>
-                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-white tracking-wide">
+                            📱 SMS Alert Configuration
+                        </h3>
+                        <p class="text-emerald-100 text-sm text-white ">Manage your alert settings for SMS notifications.</p>
+                    </div>
+
+                    <!-- 🔙 Back Button -->
                     <a href="{{ route('alert.config') }}"
                         class="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-lg font-medium hover:bg-white/30 transition ease-in-out duration-150">
                         ⬅ Back
@@ -24,7 +27,7 @@
 
                 <!-- Body -->
                 <div class="p-8">
-                    <form method="POST" action="{{ route('alert.config.save', 'email') }}" class="space-y-6">
+                    <form method="POST" action="{{ route('alert.config.save', 'sms') }}" class="space-y-6">
                         @csrf
 
                         <!-- Success Message -->
@@ -38,7 +41,7 @@
                             </div>
                         @endif
 
-                        <input type="hidden" name="alert_type" value="email">
+                        <input type="hidden" name="alert_type" value="sms">
 
                         <!-- Full Name -->
                         <div>
@@ -46,7 +49,7 @@
                                 Full Name
                             </label>
                             <input type="text" id="name" name="name"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                 placeholder="Enter your full name" required>
                         </div>
 
@@ -56,18 +59,18 @@
                                 Company Name
                             </label>
                             <input type="text" id="company" name="company"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                 placeholder="Enter your company name" required>
                         </div>
 
-                        <!-- Contact (Email) -->
+                        <!-- Contact (Phone Number) -->
                         <div>
                             <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">
-                                Contact (Email)
+                                Contact (Phone Number)
                             </label>
-                            <input type="email" id="contact" name="contact"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                placeholder="Enter email address" required>
+                            <input type="number" id="contact" name="contact"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                placeholder="Enter phone number" required>
                         </div>
 
                         <!-- Alert Message -->
@@ -76,22 +79,21 @@
                                 Alert Message
                             </label>
                             <textarea id="alert_msg" name="alert_msg" rows="4"
-                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                placeholder="Enter the message to be sent in the alert..." required></textarea>
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                placeholder="Enter the SMS message to be sent..." required></textarea>
                         </div>
 
                         <!-- Save Button -->
                         <div class="flex justify-end">
                             <button type="submit"
-                                class="inline-flex items-center gap-2 bg-indigo-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition ease-in-out duration-150">
+                                class="inline-flex items-center gap-2 bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 transition ease-in-out duration-150">
                                 💾 Save Configuration
                             </button>
                         </div>
                     </form>
-
                 </div>
+
             </div>
         </div>
     </div>
-
 </x-app-layout>
