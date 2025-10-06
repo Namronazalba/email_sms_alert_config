@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AlertConfig\AlertConfigController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,15 +18,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/alert-config', [AlertConfigController::class, 'index'])->name('alert.config');
-
+    Route::get('/alert-config/{config}/edit', [AlertConfigController::class, 'edit'])->name('alert.edit');
+    Route::put('/alert-config/{config}', [AlertConfigController::class, 'update'])->name('alert.update');
+    Route::delete('/alert-config/{config}', [AlertConfigController::class, 'destroy'])->name('alert.destroy');
     Route::get('/alert-config/email', [AlertConfigController::class, 'email'])->name('alert.email');
-    // Route::post('/alert-config/email/save', [AlertConfigController::class, 'saveEmailConfig'])->name('alert.email.save');
-
     Route::get('/alert-config/sms', [AlertConfigController::class, 'sms'])->name('alert.sms');
-    // Route::post('/alert-config/sms/save', [AlertConfigController::class, 'saveSmsConfig'])->name('alert.sms.save');
+
     Route::post('/alert-config/{type}/save', [AlertConfigController::class, 'saveConfig'])->name('alert.config.save');
 
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

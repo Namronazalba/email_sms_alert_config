@@ -45,6 +45,7 @@
                                     <th class="px-4 py-2 border-b text-left">Contact</th>
                                     <th class="px-4 py-2 border-b text-left">Alert Message</th>
                                     <th class="px-4 py-2 border-b text-left">Created At</th>
+                                    <th class="px-4 py-2 border-b text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,9 +58,27 @@
                                         <td class="px-4 py-2 border-b">{{ $config->contact }}</td>
                                         <td class="px-4 py-2 border-b">{{ $config->alert_msg }}</td>
                                         <td class="px-4 py-2 border-b text-sm text-gray-500">{{ $config->created_at->format('Y-m-d H:i') }}</td>
+                                        <td class="px-4 py-2 border-b text-right space-x-2">
+                                            <!-- Edit Button -->
+                                            <a href="{{ route('alert.edit', $config) }}" 
+                                            class="inline-flex items-center px-3 py-1 bg-yellow-500 text-white text-sm rounded hover:bg-yellow-600 transition">
+                                                ✏️ Edit
+                                            </a>
+
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('alert.destroy', $config) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Are you sure you want to delete this configuration?')" 
+                                                        class="inline-flex items-center px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition">
+                                                    🗑️ Delete
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
                 @endif
